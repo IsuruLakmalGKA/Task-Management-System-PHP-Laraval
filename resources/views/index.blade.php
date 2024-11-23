@@ -212,7 +212,7 @@
                         $("#add_task_form")[0].reset();
                         $("#addTaskModal").modal('hide');
                     }
-                    
+
                 });
             });
 
@@ -335,6 +335,31 @@
                     }
                 });
             });
+
+            //payment
+            $(document).on('click', '.paymentIcon', function (e) {
+                e.preventDefault();
+                let taskId = $(this).attr('id');
+
+                $.ajax({
+                    url: '/tasks/payment',
+                    method: 'POST',
+                    data: {
+                        id: taskId,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.status === 200) {
+                            alert(response.message);
+                            // Optionally reload tasks
+                            fetchTasks();
+                        } else {
+                            alert('Payment failed. Please try again.');
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 </body>

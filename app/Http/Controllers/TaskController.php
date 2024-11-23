@@ -38,7 +38,7 @@ class TaskController extends Controller
             'description' => $request->description,
             'due_date' => Carbon::parse($request->due_date)->format('Y-m-d'),
             'priority' => $request->priority,
-            'is_completed' => $request->is_completed ? true: false,
+            'is_completed' => $request->is_completed ? true : false,
             'is_paid' => $request->is_paid ? true : false,
         ];
 
@@ -134,7 +134,9 @@ class TaskController extends Controller
             <td>' . ($task->is_paid ? 'Yes' : 'No') . '</td>
             <td>
               <a href="#" id="' . $task->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editTaskModal"><i class="bi-pencil-square h4"></i></a>
+              <a href="#" id="' . $task->id . '" class="text-primary mx-1 paymentIcon" ><i class="bi bi-credit-card h4"></i></a>
               <a href="#" id="' . $task->id . '" class="text-danger mx-1 deleteIcon"><i class="bi-trash h4"></i></a>
+              
             </td>
           </tr>';
             }
@@ -205,7 +207,7 @@ class TaskController extends Controller
             'priority' => $request->priority,
             'is_completed' => $request->is_completed ? true : false,
             'is_paid' => $request->is_paid ? true : false,
-            
+
         ];
 
         $task->update($taskData);
@@ -221,6 +223,17 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($request->id);
         $task->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Task deleted successfully',
+        ]);
+    }
+
+    public function payment(Request $request)
+    {
+        $task = Task::findOrFail($request->id);
+        $task->paymentsave();
 
         return response()->json([
             'status' => 200,
