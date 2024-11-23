@@ -25,10 +25,13 @@
                     <input type="password" name="password" id="password" class="form-control"
                         placeholder="Enter password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100"  onclick="window.location.href='/tasks'">Login</button>
             </form>
         </div>
     </div>
+    <script>
+
+    </script>
 </body>
 
 </html>

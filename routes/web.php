@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Mail\TaskCreated;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
@@ -20,15 +21,21 @@ use App\Http\Controllers\EmployeeController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', [TaskController::class, 'index']);
+
 //Route::get('/', [LoginController::class, 'login']);
-//Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/fetch-users', [TaskController::class, 'fetchUsers'])->name('fetchUsers');
-Route::post('/store', [TaskController::class,'store'])->name('store');
-Route::get('/fetch-all', [TaskController::class, 'fetchAll'])->name('fetchAll');
-Route::get('/edit', [TaskController::class, 'edit'])->name('edit');
-Route::post('/update', [TaskController::class,'update'])->name( 'update');
-Route::post('/delete', [TaskController::class,'delete'])->name('delete');
+Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/tasks/fetch-users', [TaskController::class, 'fetchUsers'])->name('fetchUsers');
+Route::post('/tasks/store', [TaskController::class,'store'])->name('store');
+Route::get('/tasks/fetch-all', [TaskController::class, 'fetchAll'])->name('fetchAll');
+Route::get('/tasks/edit', [TaskController::class, 'edit'])->name('edit');
+Route::post('/tasks/update', [TaskController::class,'update'])->name( 'update');
+Route::post('/tasks/delete', [TaskController::class,'delete'])->name('delete');
+
+Route::get('/tasks/store/mail', function(){
+   $name = "Anushka Isuru";
+   Mail::to('mailtrap.club@gmail.com')->send(new TaskCreated()); 
+});
 
 // Route::post('/store', [EmployeeController::class,'store'])->name('store');
 // Route::get('/fetch-all', [EmployeeController::class, 'fetchAll'])->name('fetchAll');

@@ -212,6 +212,7 @@
                         $("#add_task_form")[0].reset();
                         $("#addTaskModal").modal('hide');
                     }
+                    
                 });
             });
 
@@ -249,7 +250,7 @@
                     success: function (res) {
                         console.log(res.status);
                         if (res.status === 200) {
-                            //console.log(res.user_id);
+                            console.log(res);
                             // Populate the modal fields with the task data
                             $("#edit_user_id").val(res.user_id);
                             $("#edit_title").val(res.title);

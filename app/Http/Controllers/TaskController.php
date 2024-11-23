@@ -38,9 +38,11 @@ class TaskController extends Controller
             'description' => $request->description,
             'due_date' => Carbon::parse($request->due_date)->format('Y-m-d'),
             'priority' => $request->priority,
-            'is_completed' => $request->is_completed ? true : false,
+            'is_completed' => $request->is_completed ? true: false,
             'is_paid' => $request->is_paid ? true : false,
         ];
+
+
 
         Task::create($taskData);
 
@@ -48,6 +50,7 @@ class TaskController extends Controller
             'status' => 200,
             'message' => 'Task added successfully',
         ]);
+
     }
 
     // Fetch all tasks
@@ -202,6 +205,7 @@ class TaskController extends Controller
             'priority' => $request->priority,
             'is_completed' => $request->is_completed ? true : false,
             'is_paid' => $request->is_paid ? true : false,
+            
         ];
 
         $task->update($taskData);

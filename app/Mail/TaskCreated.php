@@ -44,7 +44,8 @@ class TaskCreated extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            //email view path
+            view: 'view.created',
         );
     }
 
@@ -62,6 +63,6 @@ class TaskCreated extends Mailable
     {
         return $this->view('emails.tasks.created')
                     ->subject('A New Task Has Been Created')
-                    ->with(['task' => $this->Task]);
+                    //->with(['task' => $this->Task]);
     }
 }
